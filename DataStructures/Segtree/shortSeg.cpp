@@ -9,6 +9,7 @@ using namespace std;
 #define mp make_pair
 
 template <typename T>
+
 struct SegTree{
 	int N;
 	T dummy;
