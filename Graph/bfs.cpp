@@ -26,11 +26,9 @@ int dist[maxn];
 
 void bfs(int root){
 	memset(dist, inf, sizeof dist);
-	
 	dist[root] = 0;
 	queue<int> q;
 	q.push(root);
-
 	while(!q.empty()){
 		int u = q.front();
 		q.pop();

@@ -14,7 +14,7 @@ using namespace std;
 typedef vector<int> vi;
 
 int lsb(int i){ return i & -i;}
-// Classic idea -> Point query, Point update all in O(log n)
+
 struct BIT{
 	int size;
 	vi table;
