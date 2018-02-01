@@ -19,7 +19,7 @@ struct BIT{
 	int size;
 	vi table;
 	BIT(int sz){
-		table.resize(sz+1, 0);
+		table.resize(sz+2, 0);
 		size = sz+1;
 	}
 	// update position pos by delta
