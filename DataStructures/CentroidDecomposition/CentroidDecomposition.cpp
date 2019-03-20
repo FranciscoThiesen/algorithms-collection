@@ -73,14 +73,16 @@ struct centroid_decomposition {
     }
 
     void decompose(int loc, const int par, const vvi& graph) {
+        
         fill(all(subtree_size), 0);
         dfs( loc, -1, graph );
+        
         int C = find_centroid(loc, -1, subtree_size[loc], graph); 
+        
         node_mapping[C] = centroid_count++;  
         
         if( par != -1) {
             centroid_graph[ node_mapping[par] ].push_back( node_mapping[C] );    
-            
             father[ node_mapping[C] ] = node_mapping[par];
         }
         
