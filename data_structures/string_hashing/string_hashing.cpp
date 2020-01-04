@@ -1,9 +1,4 @@
-#include <bits/stdc++.h>
-#define rep(i,a,b) for(int (i) = (a); (i) < (b); ++(i))
-using namespace std;
-
-using ll = long long;
-
+// Heavily based on the Algorithms Live! video about String Hashing
 ll powmod(ll a, ll b, ll mod)
 {
     a %= mod;assert(b >= 0);
@@ -23,40 +18,45 @@ ll norm( ll val ){
     return val;
 }
 
-constexpr ll p0 = 1000000037;
-constexpr ll p1 = 1000000007;
+constexpr ll p0 = 1000'000'033;
+constexpr ll p1 = 1000'000'007;
 constexpr int ms = 100100; // used for calcuating table of powers
 constexpr int base = 31; // should be a little bit larger than the alphabet..
 
 long long ppow[2][ms];
 
-// It is very important to precalculate the powers
+// Remember to call init() function!
 struct Hash {
+    // check if length matters to the specific problem!
+    
     int len = 0; // does not always matter, depends on the problem
     long long H[2] = {0LL, 0LL};
     bool operator != (const Hash& rhs) const { return (H[0] != rhs.H[0] || H[1] != rhs.H[1]); }
     
     // check if len should be using in this operator.. depends on the problem
     bool operator == (const Hash& rhs) const { return ( ( H[0] == rhs.H[0] && H[1] == rhs.H[1]) && len == rhs.len); }
+    
     Hash(ll h0 = 0, ll h1 = 0) { H[0] = norm<p0>(h0); H[1] = norm<p1>(h1); } 
+    
     inline void addBack(char c) {
         H[0] = (H[0] + (c - 'a' + 1) * ppow[0][len]) % p0;
         H[1] = (H[1] + (c - 'a' + 1) * ppow[1][len]) % p1;
         ++len;
     }
-    inline void addFront(char c) 
-    {
+    
+    inline void addFront(char c) {
         H[0] = (H[0] * base + (c - 'a' + 1) ) % p0;
         H[1] = (H[1] * base + (c - 'a' + 1) ) % p1;
         ++len;
     }
-    inline void removeBack(char c)
-    {
+    
+    inline void removeBack(char c) {
         // assert( len > 0);
         H[0] = norm<p0>( H[0] - (c - 'a' + 1) * ppow[0][len]); 
         H[1] = norm<p1>( H[1] - (c - 'a' + 1) * ppow[1][len]);
         --len;
     }
+    
     inline void removeFront(char c)
     {
         //assert(len > 0);
@@ -68,10 +68,12 @@ struct Hash {
         H[1] = (H[1] * invMod) % p1;
         --len;
     }
-    void addString( const string& s) { for(const char& c) addBack(c); }
+
+    void addString( const string& s) { for(const char& c : s) addBack(c); }
 };
 
-void init() {
+void init() 
+{
     ppow[0][0] = ppow[1][0] = 1;
     rep(i, 1, ms) 
     {
@@ -82,6 +84,7 @@ void init() {
 
 int main()
 {
+
     init();
     return 0;
 }

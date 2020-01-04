@@ -46,7 +46,8 @@ struct FenwickTree {
 
 };
 
-
+// small test program!
+/*
 int vet[10009];
 int sum(int a, int b){
 	int ans = vet[a];
@@ -87,3 +88,4 @@ int main() {
 	}
 	return 0;
 }
+*/
