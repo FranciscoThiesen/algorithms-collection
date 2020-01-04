@@ -18,7 +18,6 @@ struct node
     node() {}
 }
 
-
 struct mergeSortTree {
     int n;
     vector<node> tree;
@@ -74,7 +73,6 @@ struct mergeSortTree {
             int mid = (lo + hi) / 2;
             build( 2 * idx, lo, mid, pos, val);
             build( 2 * idx + 1, mid + 1, hi, pos, val);
-            
         }
     }
 }

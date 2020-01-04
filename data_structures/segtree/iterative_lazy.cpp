@@ -1,15 +1,3 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-
-#define fi first
-#define se second
-#define pb push_back
-#define mp make_pair
-
-typedef vector<int> vi;
-typedef pair<int, int> ii;
-
 // Ja foi testado....
 template <typename T>
 struct seg{
@@ -70,8 +58,8 @@ struct seg{
 		push(r);
 		T res = id;
 		for(; l < r; l >>= 1, r >>= 1){
-			if(l&1) res = combine( res, t[l++]);
-			if(r&1) res = combine( res, t[--r]);
+			if(l&1) res = combine( res, Tree[l++]);
+			if(r&1) res = combine( res, Tree[--r]);
 		}
 		return res;
 	}

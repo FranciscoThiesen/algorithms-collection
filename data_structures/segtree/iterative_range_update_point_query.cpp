@@ -1,15 +1,3 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-
-#define fi first
-#define se second
-#define pb push_back
-#define mp make_pair
-
-typedef vector<int> vi;
-typedef pair<int, int> ii;
-
 // Ja foi testado....
 // Olhar o tutorial caso combine nao seja comutativa (Efficient and easy segment trees)
 template <typename T>
@@ -41,7 +29,3 @@ struct seg{
 		for(p += N; p ; p >>= 1) res = combine(res, T[p]);
 	}
 };
-
-int main(){
-	return 0;
-}
