@@ -22,7 +22,7 @@ struct FenwickTree {
 		return sum;
 	}
 
-	void update(vector<int> & ft, int i, T v) {
+	void update(vector<T> & ft, int i, T v) {
 		++i;
 		while(i < N) {
 			ft[i] += v;
