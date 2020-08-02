@@ -25,6 +25,7 @@ struct BIT {
             resp += table[idx];
             idx = (idx & (idx + 1)) - 1;
         }
+        return resp;
     }
 
     T get(int l, int r) { return get(r) - get(l - 1); }
