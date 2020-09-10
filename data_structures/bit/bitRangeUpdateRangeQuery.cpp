@@ -2,48 +2,55 @@
 
 using namespace std;
 
-template <typename T>
-struct FenwickTree {
+template <typename T> struct FenwickTree
+{
 	vector<T> ft1, ft2;
 	int N;
 
-	FenwickTree(int n) {
-		ft1.resize(n + 1, 0);	
+	FenwickTree(int n)
+	{
+		ft1.resize(n + 1, 0);
 		ft2.resize(n + 1, 0);
-		N = n+1;
+		N = n + 1;
 	}
-	T internalQuery(vector<T> & ft, int i) {
+	T internalQuery(vector<T>& ft, int i)
+	{
 		T sum = 0;
 		++i;
-		while(i > 0){
+		while (i > 0)
+		{
 			sum += ft[i];
 			i -= (i & -i);
 		}
 		return sum;
 	}
 
-	void update(vector<T> & ft, int i, T v) {
+	void update(vector<T>& ft, int i, T v)
+	{
 		++i;
-		while(i < N) {
+		while (i < N)
+		{
 			ft[i] += v;
 			i += (i & -i);
 		}
 	}
-	
-	void update(int i, int j, T v){ // 0-indexed
+
+	void update(int i, int j, T v)
+	{ // 0-indexed
 		update(ft1, i, v);
-		update(ft1, j+1, -v);
-		update(ft2, i, v*(i-1));
-		update(ft2, j+1, -v*j);
+		update(ft1, j + 1, -v);
+		update(ft2, i, v * (i - 1));
+		update(ft2, j + 1, -v * j);
 	}
-	T query(int i){ // 0-indexed
-		return internalQuery(ft1, i)*i - internalQuery(ft2, i);
-	}
-
-	T query(int i, int j){ // queries for a closed interval [i, j]   0-indexed
-		return query(j) - query(i-1);
+	T query(int i)
+	{ // 0-indexed
+		return internalQuery(ft1, i) * i - internalQuery(ft2, i);
 	}
 
+	T query(int i, int j)
+	{ // queries for a closed interval [i, j]   0-indexed
+		return query(j) - query(i - 1);
+	}
 };
 
 // small test program!
