@@ -1,9 +1,9 @@
 // Heavily based on the Algorithms Live! video about String Hashing
-ll powmod(ll a, ll b, ll mod)
+long long powmod(long long a, long long b, long long mod)
 {
 	a %= mod;
 	assert(b >= 0);
-	ll res = 1;
+	long long res = 1;
 	for (; b; b >>= 1)
 	{
 		if (b & 1) res = (res * a) % mod;
@@ -12,27 +12,27 @@ ll powmod(ll a, ll b, ll mod)
 	return res;
 }
 
-template <ll MOD> ll norm(ll val)
+template <long long MOD> long long norm(long long val)
 {
 	val %= MOD;
 	if (val < 0) val += MOD;
 	return val;
 }
 
-constexpr ll p0 = 1000'000'033;
-constexpr ll p1 = 1000'000'007;
+constexpr long long p0 = 1000'000'033;
+constexpr long long p1 = 1000'000'007;
 constexpr int ms = 100100; // used for calcuating table of powers
 constexpr int base = 31;   // should be a little bit larger than the alphabet..
 
 long long ppow[2][ms];
 
-// Remember to call init() function!
+// Remember to calong long init() function!
 struct Hash
 {
 	// check if length matters to the specific problem!
 
 	int len = 0; // does not always matter, depends on the problem
-	long long H[2] = {0LL, 0LL};
+	long long H[2] = {0, 0};
 	bool operator!=(const Hash& rhs) const
 	{
 		return (H[0] != rhs.H[0] || H[1] != rhs.H[1]);
@@ -44,7 +44,7 @@ struct Hash
 		return ((H[0] == rhs.H[0] && H[1] == rhs.H[1]) && len == rhs.len);
 	}
 
-	Hash(ll h0 = 0, ll h1 = 0)
+	Hash(long long h0 = 0, long long h1 = 0)
 	{
 		H[0] = norm<p0>(h0);
 		H[1] = norm<p1>(h1);
@@ -76,10 +76,10 @@ struct Hash
 	{
 		// assert(len > 0);
 		H[0] = norm<p0>(H[0] - (c - 'a' + 1));
-		ll invMod = powmod(ppow[0][len - 1], p0 - 2, p0);
+		long long invMod = powmod(base, p0 - 2, p0);
 		H[0] = (H[0] * invMod) % p0;
 		H[1] = norm<p1>(H[1] - (c - 'a' + 1));
-		invMod = powmod(ppow[1][len - 1], p1 - 2, p1);
+		invMod = powmod(base, p1 - 2, p1);
 		H[1] = (H[1] * invMod) % p1;
 		--len;
 	}
