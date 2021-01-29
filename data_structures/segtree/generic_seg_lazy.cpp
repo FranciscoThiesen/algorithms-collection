@@ -87,6 +87,7 @@ template <typename T, typename U> struct seg_lazy
 			if ((i & 1) == 1) res_left = res_left * value[i++];
 			if ((j & 1) == 0) res_right = value[j--] * res_right;
 		}
+		return res_left * res_right;
 	}
 };
 
